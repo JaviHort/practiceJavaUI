@@ -46,12 +46,7 @@ public class Principal extends JFrame {
         //Creamos GridLayout
         
         GridLayout casillas = new GridLayout(2, 0);
-        setLayout(casillas);
-        //add(new JButton("1"));
-        //add(new JButton("2"));
-        
-        JFrame j = new JFrame();
-        
+        setLayout(casillas);        
         
         //Inicializamos panel contenedor y lo incluimos en el frame
         
@@ -69,11 +64,15 @@ public class Principal extends JFrame {
         panelDePestanias = new JTabbedPane();
         panelDePestanias.setBounds(10, 11, 383, 174);
         contentPanel.add(panelDePestanias);
-        contentPanel.add(new JButton("Boton"));
+        
+        JButton close = new JButton("Boton");
+        close.addActionListener(new CloseApplication(1));
+        contentPanel.add(close);
         
         //Añadimos primer panel al JTabbedPane que será nuestra primera pestaña
+        //El identificador Hash será 0 para indicar que es la pestaña principal
         
-        JPanel pestania1 = new JPanel();
+        Pestania pestania1 = new Pestania(0);
         panelDePestanias.addTab("Pestania 1", null, pestania1, null);
         pestania1.setLayout(null);
         
@@ -87,7 +86,7 @@ public class Principal extends JFrame {
         
         //Añadimos primer panel al JTabbedPane que será nuestra primera pestaña
         
-        JPanel pestania2 = new JPanel();
+        Pestania pestania2 = new Pestania(1);
         panelDePestanias.addTab("Pestania 2", null, pestania2, null);
         pestania2.setLayout(null);
         
