@@ -15,18 +15,17 @@ import javax.swing.*;
 public class CloseApplication implements ActionListener {
     
     int hash;
+    JTabbedPane obj;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (hash == 0) {
-            JOptionPane.showMessageDialog(null, "Cerramos la aplicacion principal");
-        } else {
-            JOptionPane.showMessageDialog(null, "Cerramos otra pestaña");
-        }
+        //JOptionPane.showMessageDialog(null, "Cerramos la aplicacion " + hash);
+        obj.remove(obj.getSelectedIndex());
     }
     
-    public CloseApplication(int id) {
+    public CloseApplication(int id, JTabbedPane p) {
         hash = id;
+        obj = p;
     }
     
 }

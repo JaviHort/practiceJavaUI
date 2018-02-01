@@ -5,18 +5,8 @@
  */
 package pruebaventanamultipestaña;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
-import java.util.*;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import java.awt.*;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -66,15 +56,31 @@ public class Principal extends JFrame {
         contentPanel.add(panelDePestanias);
         
         JButton close = new JButton("Boton");
-        close.addActionListener(new CloseApplication(1));
+        close.addActionListener(new CloseApplication(panelDePestanias));
         contentPanel.add(close);
         
         //Añadimos primer panel al JTabbedPane que será nuestra primera pestaña
         //El identificador Hash será 0 para indicar que es la pestaña principal
         
         Pestania pestania1 = new Pestania(0);
-        panelDePestanias.addTab("Pestania 1", null, pestania1, null);
-        pestania1.setLayout(null);
+        panelDePestanias.addTab("Pestania principal", null, pestania1, null);
+        pestania1.setLayout(new GridLayout(1, 4));
+        
+        JButton addTab1 = new JButton("Add Tab 1");
+        addTab1.addActionListener(new AddNewTab(1));
+        pestania1.add(addTab1);
+        
+        JButton addTab2 = new JButton("Add Tab 2");
+        addTab2.addActionListener(new AddNewTab(2));
+        pestania1.add(addTab2);
+        
+        JButton addTab3 = new JButton("Add Tab 3");
+        addTab3.addActionListener(new AddNewTab(3));
+        pestania1.add(addTab3);
+        
+        JButton addTab4 = new JButton("Add Tab 4");
+        addTab4.addActionListener(new AddNewTab(4));
+        pestania1.add(addTab4);
         
         
         //Añadimos etiqueta a la pestaña 1
@@ -95,39 +101,6 @@ public class Principal extends JFrame {
         JLabel taglabel2 = new JLabel("P2");
         taglabel2.setBounds(10, 11, 290, 14);
         pestania2.add(taglabel2);
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        /*JFrame ventIni = new JFrame("Ventana inicial");
-        JButton jb = new JButton("Boton");
-        jb.setSize(20, 20);
-        
-        ventIni.setSize(400, 400);
-        ventIni.setVisible(true);
-        ventIni.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        GridLayout gl = new GridLayout(3, 2);*/
-        
-        //Arrancamos hilo de ejecución
-        
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    // creando el frame y lo muestra
-                    Principal frame = new Principal();
-                    frame.setVisible(true);
-                } catch (Exception e){
-                   e.printStackTrace();
-                }
-                }
-        });
-        
     }
     
 }
