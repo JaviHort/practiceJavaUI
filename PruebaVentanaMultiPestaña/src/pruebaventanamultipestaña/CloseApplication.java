@@ -14,17 +14,25 @@ import javax.swing.*;
  */
 public class CloseApplication implements ActionListener {
     
-    int hash;
     JTabbedPane obj;
-
+    
+    /**
+     * En esta clase se elimina la pestaña en primer plano
+     */
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-        //JOptionPane.showMessageDialog(null, "Cerramos la aplicacion " + hash);
-        obj.remove(obj.getSelectedIndex());
+        
+        //obj.getSelectedIndex() devuelve la pestaña en primer plano
+        if (obj.getSelectedIndex() > 0) obj.remove(obj.getSelectedIndex());
     }
+   
+    /**
+     * 
+     * @param p -> JTabbedPane (panel de pestañas) contenedor de todas las pestañas
+     */
     
-    public CloseApplication(int id, JTabbedPane p) {
-        hash = id;
+    public CloseApplication(JTabbedPane p) {
         obj = p;
     }
     

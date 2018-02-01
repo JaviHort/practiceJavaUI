@@ -8,6 +8,8 @@ package pruebaventanamultipestaña;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -20,6 +22,19 @@ public class Principal extends JFrame {
     
     //Panel contenedor de las distintas pestañas
     private JTabbedPane panelDePestanias;
+    
+    private boolean ContainerHasObject(Component p) {
+        
+        Component v[] = contentPanel.getComponents();
+        
+        for (int i = 0; i < v.length; i++) {
+            
+            if(v[i] == p) return true;
+            
+        }
+        
+        return false;
+    }
     
     /**
      * Constructor por defecto de la clase
@@ -53,11 +68,38 @@ public class Principal extends JFrame {
         
         panelDePestanias = new JTabbedPane();
         panelDePestanias.setBounds(10, 11, 383, 174);
+        
         contentPanel.add(panelDePestanias);
         
-        JButton close = new JButton("Boton");
+        JButton close = new JButton("Cerrar pestaña actual");
         close.addActionListener(new CloseApplication(panelDePestanias));
         contentPanel.add(close);
+        
+        /*ChangeListener que se activa al cambiar de pestaña y que añade o elimina el botón de cerrar pestaña
+        al cambiar de la pestaña principal a otras*/
+        
+        /**
+         * BUG! ARREGLAR CÓDIGO.
+         * Elimina el boton, pero no la apariencia (aparece dibujado aunque no se pueda accionar)
+         */
+        
+        panelDePestanias.addChangeListener(new ChangeListener() {
+            
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (panelDePestanias.getSelectedIndex() != 0) {
+                    if (!ContainerHasObject(close)) {
+                        //JOptionPane.showMessageDialog(null, "No tiene el boton cerrar");
+                        contentPanel.add(close);
+                    }
+                } else {
+                    if (ContainerHasObject(close)) {
+                        //JOptionPane.showMessageDialog(null, "Pestaña principal");
+                        contentPanel.remove(close);
+                    }
+                }
+            }
+        });
         
         //Añadimos primer panel al JTabbedPane que será nuestra primera pestaña
         //El identificador Hash será 0 para indicar que es la pestaña principal
