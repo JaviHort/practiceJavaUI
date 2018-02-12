@@ -22,20 +22,7 @@ public class Principal extends JFrame {
     
     //Panel contenedor de las distintas pestañas
     private JTabbedPane panelDePestanias;
-    
-    private boolean ContainerHasObject(Component p) {
-        
-        Component v[] = contentPanel.getComponents();
-        
-        for (int i = 0; i < v.length; i++) {
-            
-            if(v[i] == p) return true;
-            
-        }
-        
-        return false;
-    }
-    
+      
     /**
      * Constructor por defecto de la clase
      */
@@ -83,23 +70,7 @@ public class Principal extends JFrame {
          * Elimina el boton, pero no la apariencia (aparece dibujado aunque no se pueda accionar)
          */
         
-        panelDePestanias.addChangeListener(new ChangeListener() {
-            
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                if (panelDePestanias.getSelectedIndex() != 0) {
-                    if (!ContainerHasObject(close)) {
-                        //JOptionPane.showMessageDialog(null, "No tiene el boton cerrar");
-                        contentPanel.add(close);
-                    }
-                } else {
-                    if (ContainerHasObject(close)) {
-                        //JOptionPane.showMessageDialog(null, "Pestaña principal");
-                        contentPanel.remove(close);
-                    }
-                }
-            }
-        });
+        panelDePestanias.addChangeListener(new ChangeListenerTab(panelDePestanias, close, contentPanel));
         
         //Añadimos primer panel al JTabbedPane que será nuestra primera pestaña
         //El identificador Hash será 0 para indicar que es la pestaña principal
