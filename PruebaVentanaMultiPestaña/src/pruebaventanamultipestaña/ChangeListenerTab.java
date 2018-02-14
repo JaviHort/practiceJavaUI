@@ -39,13 +39,11 @@ public class ChangeListenerTab implements ChangeListener {
     public void stateChanged(ChangeEvent e) {
                 if (panelPestania.getSelectedIndex() != 0) {
                     if (!ContainerHasObject(close)) {
-                        //JOptionPane.showMessageDialog(null, "No tiene el boton cerrar");
                         contentPanel.add(close);
                         close.setVisible(true);
                     }
                 } else {
                     if (ContainerHasObject(close)) {
-                        //JOptionPane.showMessageDialog(null, "Pestaña principal");
                         close.setVisible(false);
                         contentPanel.remove(close);
                     }

@@ -23,4 +23,6 @@ public class Pestania extends JPanel {
         super();
         idHash = hash;
     }
+    
+    public int getId() { return this.idHash; }
 }

@@ -23,17 +23,29 @@ public class Principal extends JFrame {
     //Panel contenedor de las distintas pestañas
     private JTabbedPane panelDePestanias;
       
+    //Dimension inicial (y mínima) de la ventana principal
+    private Dimension dimension;
+    
     /**
      * Constructor por defecto de la clase
      */
     
     public Principal() {
         
+        contentPanel = new JPanel();
+        panelDePestanias = new JTabbedPane();
+        dimension = new Dimension(900, 600);
+        _init_();
+    }
+    
+    public void _init_() {
+        
         //Al implementar JFrame (extends JFrame) es un JFrame, incorporando todos sus métodos
         
         setTitle("Titulo Ventana");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(100, 100, 419, 234);
+        setMinimumSize(dimension);
         
         //Creamos GridLayout
         
@@ -42,10 +54,8 @@ public class Principal extends JFrame {
         
         //Inicializamos panel contenedor y lo incluimos en el frame
         
-        contentPanel = new JPanel();
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPanel);
-        
         
         //Creamos un layout (distribución) nulo para posicionar todos los elementos en las posiciones que deseemos
         
@@ -53,7 +63,6 @@ public class Principal extends JFrame {
         
         //Inicializamos el panel de pestañas
         
-        panelDePestanias = new JTabbedPane();
         panelDePestanias.setBounds(10, 11, 383, 174);
         
         contentPanel.add(panelDePestanias);
@@ -65,11 +74,6 @@ public class Principal extends JFrame {
         /*ChangeListener que se activa al cambiar de pestaña y que añade o elimina el botón de cerrar pestaña
         al cambiar de la pestaña principal a otras*/
         
-        /**
-         * BUG! ARREGLAR CÓDIGO.
-         * Elimina el boton, pero no la apariencia (aparece dibujado aunque no se pueda accionar)
-         */
-        
         panelDePestanias.addChangeListener(new ChangeListenerTab(panelDePestanias, close, contentPanel));
         
         //Añadimos primer panel al JTabbedPane que será nuestra primera pestaña
@@ -79,20 +83,32 @@ public class Principal extends JFrame {
         panelDePestanias.addTab("Pestania principal", null, pestania1, null);
         pestania1.setLayout(new GridLayout(1, 4));
         
+        /**
+         * Los botones añaden la pestaña correspondiente al botón pulsado (mismo id)
+         * 
+         * SIGUIENTES PASOS:
+         * 
+         *  - Impedir que no existan más de 5 pestañas (la principal y las otras 4 que creamos desde la principal)
+         *  - Cambiar de posición las pestañas (?)
+         *      -> Como consecuencia que el boton de cerrar pestaña se comporte de igual manera (oculto en la principal
+         *         y visible en el resto)
+         *  - Si pulsamos el botón de "AddTabN" y la pestaña N está ya abierta, cambiar a la pestaña N
+         */   
+        
         JButton addTab1 = new JButton("Add Tab 1");
-        addTab1.addActionListener(new AddNewTab(1));
+        addTab1.addActionListener(new AddNewTab(panelDePestanias, 1));
         pestania1.add(addTab1);
         
         JButton addTab2 = new JButton("Add Tab 2");
-        addTab2.addActionListener(new AddNewTab(2));
+        addTab2.addActionListener(new AddNewTab(panelDePestanias, 2));
         pestania1.add(addTab2);
         
         JButton addTab3 = new JButton("Add Tab 3");
-        addTab3.addActionListener(new AddNewTab(3));
+        addTab3.addActionListener(new AddNewTab(panelDePestanias, 3));
         pestania1.add(addTab3);
         
         JButton addTab4 = new JButton("Add Tab 4");
-        addTab4.addActionListener(new AddNewTab(4));
+        addTab4.addActionListener(new AddNewTab(panelDePestanias, 4));
         pestania1.add(addTab4);
         
         
