@@ -93,13 +93,13 @@ public class Principal extends JFrame {
         /**
          * Los botones añaden la pestaña correspondiente al botón pulsado (mismo id)
          * 
-         * SIGUIENTES PASOS:
+         * SIGUIENTES PASOS (POR PRIORIDAD):
          * 
-         *  - Impedir que no existan más de 5 pestañas (la principal y las otras 4 que creamos desde la principal)
-         *  - Cambiar de posición las pestañas (?)
+         *  1) Impedir que no existan más de 5 pestañas (la principal y las otras 4 que creamos desde la principal)
+         *  2) Si pulsamos el botón de "AddTabN" y la pestaña N está ya abierta, cambiar a la pestaña N
+         *  3) Cambiar de posición las pestañas (?)
          *      -> Como consecuencia que el boton de cerrar pestaña se comporte de igual manera (oculto en la principal
          *         y visible en el resto)
-         *  - Si pulsamos el botón de "AddTabN" y la pestaña N está ya abierta, cambiar a la pestaña N
          */   
         
         JButton addTab1 = new JButton("Add Tab 1");
