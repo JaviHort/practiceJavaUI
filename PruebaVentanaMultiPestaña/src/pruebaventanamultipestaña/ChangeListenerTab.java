@@ -37,17 +37,17 @@ public class ChangeListenerTab implements ChangeListener {
     
     @Override
     public void stateChanged(ChangeEvent e) {
-                if (panelPestania.getSelectedIndex() != 0) {
-                    if (!ContainerHasObject(close)) {
-                        contentPanel.add(close);
-                        close.setVisible(true);
-                    }
-                } else {
-                    if (ContainerHasObject(close)) {
-                        close.setVisible(false);
-                        contentPanel.remove(close);
-                    }
-                }
+        if (panelPestania.getSelectedIndex() != 0) {
+            if (!ContainerHasObject(close)) {
+                contentPanel.add(close);
+                close.setVisible(true);
+            }
+        } else {
+            if (ContainerHasObject(close)) {
+                close.setVisible(false);
+                contentPanel.remove(close);
+            }
+        }
     }
     
     public ChangeListenerTab() {

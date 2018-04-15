@@ -6,6 +6,10 @@
 package pruebaventanamultipestaña;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
@@ -21,11 +25,14 @@ public class Principal extends JFrame {
     private JPanel contentPanel;
     
     //Panel contenedor de las distintas pestañas
-    private JTabbedPane panelDePestanias;
+    private SubMenusContainer panelDePestanias;
       
     //Dimension inicial (y mínima) de la ventana principal
     private Dimension dimension;
     
+    private boolean dragging = false;
+    private Image tabImage = null;
+    private int draggedTabIndex = 0;
     /**
      * Constructor por defecto de la clase
      */
@@ -33,7 +40,7 @@ public class Principal extends JFrame {
     public Principal() {
         
         contentPanel = new JPanel();
-        panelDePestanias = new JTabbedPane();
+        panelDePestanias = new SubMenusContainer();
         dimension = new Dimension(900, 600);
         _init_();
     }
@@ -130,6 +137,52 @@ public class Principal extends JFrame {
         JLabel taglabel2 = new JLabel("P2");
         taglabel2.setBounds(10, 11, 290, 14);
         pestania2.add(taglabel2);
+        
+        //Añadimos listener a las pestañas
+        
+        addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                
+            }
+        });
+        
+        /*panelDePestanias.addMouseMotionListener(new MouseMotionAdapter() {
+        public void mouseDragged(MouseEvent e) {
+
+          if(!dragging) {
+            // Gets the tab index based on the mouse position
+            int tabNumber = panelDePestanias.getUI().tabForCoordinate(panelDePestanias, e.getX(), e.getY());
+
+            if(tabNumber >= 0) {
+              draggedTabIndex = tabNumber;
+              Rectangle bounds = panelDePestanias.getUI().getTabBounds(panelDePestanias, tabNumber);
+
+
+              // Paint the tabbed pane to a buffer
+              Image totalImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+              Graphics totalGraphics = totalImage.getGraphics();
+              totalGraphics.setClip(bounds);
+              // Don't be double buffered when painting to a static image.
+              panelDePestanias.setDoubleBuffered(false);
+              panelDePestanias.paintComponents(totalGraphics);
+
+              // Paint just the dragged tab to the buffer
+              tabImage = new BufferedImage(bounds.width, bounds.height, BufferedImage.TYPE_INT_ARGB);
+              Graphics graphics = tabImage.getGraphics();
+              graphics.drawImage(totalImage, 0, 0, bounds.width, bounds.height, bounds.x, bounds.y, bounds.x + bounds.width, bounds.y+bounds.height, panelDePestanias.this);
+
+              dragging = true;
+              repaint();
+            }
+          } else {
+            currentMouseLocation = e.getPoint();
+
+            // Need to repaint
+            repaint();
+          }
+
+        }
+    });*/
     }
     
 }

@@ -14,7 +14,7 @@ import javax.swing.*;
  */
 public class CloseApplication implements ActionListener {
     
-    JTabbedPane obj;
+    SubMenusContainer obj;
     
     /**
      * En esta clase se elimina la pestaña en primer plano
@@ -32,7 +32,7 @@ public class CloseApplication implements ActionListener {
      * @param p -> JTabbedPane (panel de pestañas) contenedor de todas las pestañas
      */
     
-    public CloseApplication(JTabbedPane p) {
+    public CloseApplication(SubMenusContainer p) {
         obj = p;
     }
     
